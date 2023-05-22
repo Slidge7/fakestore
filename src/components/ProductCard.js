@@ -1,8 +1,27 @@
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image, FlatList, ActivityIndicator } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import ProductPage from '../screens/ProductPage';
+
+
+
 
 // product card component
-const ProductCard = ({ product }) => (
+const ProductCard = ({ product  }) => {
+    const navigation = useNavigation();
+    const [isModalVisible, setModalVisible] = useState(false);
+
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
+    };
+    return (
+
+        <>
+        <ProductPage
+            product={product}
+            toggleModal={toggleModal}
+            isModalVisible={isModalVisible}
+        />
     <View style={styles.container}>
         <View style={{ borderBottomWidth: 1, paddingBottom: 10 }}>
             <Image
@@ -16,8 +35,20 @@ const ProductCard = ({ product }) => (
         <View style={styles.priceContainer}>
             <Text style={styles.price}>{product.price} $</Text>
         </View>
+
+        <TouchableOpacity
+        onPress={()=>{
+               //     navigation.navigate('ProductPage', { 'product' : product });
+               toggleModal();
+        }}
+        >
+            <Text>Show Product</Text>
+        </TouchableOpacity>
     </View>
+                </>
 );
+
+    }
 
 export default ProductCard
 

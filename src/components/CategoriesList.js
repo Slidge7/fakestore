@@ -9,7 +9,7 @@ const CategoryHolder = ({ category, onPress, selectedCategory }) => (
         style={selectedCategory === category ? styles.selectedCategory : styles.categoryHolder}
         onPress={onPress}
     >
-        <Text style={{ fontSize: 18 }}>{category}</Text>
+        <Text style={selectedCategory === category ? { fontSize: 18, color: "white" } : { fontSize: 18 }}>{category}</Text>
     </TouchableOpacity>
 );
 
@@ -19,6 +19,7 @@ const CategoryHolder = ({ category, onPress, selectedCategory }) => (
 const CategoryList = ({ categories, handleCategorySelection, selectedCategory }) => {
     return (
         <View>
+            <Text style={styles.category}>Select Category</Text>
 
             <FlatList
                 horizontal
@@ -62,5 +63,9 @@ const styles = StyleSheet.create({
         backgroundColor: "#4fa9ff",
         paddingHorizontal: 20,
         paddingVertical: 2
-    },
+    }, category: {
+        marginLeft: 10,
+        marginTop: 10,
+        fontSize: 16
+    }
 });
